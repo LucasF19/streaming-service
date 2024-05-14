@@ -1,22 +1,40 @@
-import { Component, Input } from '@angular/core';
-import { TmdbService } from '../../services/tmdb.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { MovieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.html',
+  styleUrl: './home.scss',
 })
-export class AppHome {
-  titleHome!: 'teste';
-  movies = [
-    { title: 'Movie 1', overview: 'Overview 1', poster_path: '/path/to/poster1.jpg' },
-    { title: 'Movie 2', overview: 'Overview 2', poster_path: '/path/to/poster2.jpg' },
-  ];
+export class AppHome implements OnInit{
+  releasesMovies = [];
+  actionMovies = [];
+  animationMovies = [];
+  avatar = '/docs/images/people/profile-picture-5.jpg';
 
-  constructor(private tmdbService: TmdbService) { }
+  constructor(private movieService: MovieService) { }
+
+  ngOnInit(): void {
+    this.getAllMovies();
+    this.getAnimationMovies();
+    this.getActionMovies();
+  }
 
   getAllMovies(){
-    this.tmdbService.getAllMovies().subscribe((data: any) => {
-      this.movies = data.results;
+    this.movieService.getReleasesMovies().subscribe((data: any) => {
+      this.releasesMovies = data.results;
+    });
+  }
+
+  getAnimationMovies(){
+    this.movieService.getMoviesByGenre(16).subscribe((data: any) => {
+      this.animationMovies = data.results;
+    });
+  }
+
+  getActionMovies(){
+    this.movieService.getMoviesByGenre(18).subscribe((data: any) => {
+      this.actionMovies = data.results;
     });
   }
 }

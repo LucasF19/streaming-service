@@ -1,3 +1,14 @@
-.card img {
-  background-color: #d447a5;
+img {
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.card-movie img{
+  height: 216px;
+  width: 152px;
+}
+
+.card-movie-large{
+  width: 350px;
+  height: 220px;
 }

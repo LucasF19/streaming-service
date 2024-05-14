@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
 import { AppHome } from "./pages/home/home";
-import { TmdbService } from "./services/tmdb.service";
+import { MovieService } from "./services/movie.service";
 
 export const routes: Routes = [
   { path: '', component: AppHome },
@@ -14,7 +14,7 @@ export const routes: Routes = [
     AppHome, 
   ],
   providers:[
-    TmdbService,
+    MovieService,
   ],
   imports: [
     RouterModule.forChild(routes),
