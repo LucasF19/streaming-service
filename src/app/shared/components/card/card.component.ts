@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class MovieCardComponent {
   @Input() movies!:any;
+  @Input() size!: string;
 }
