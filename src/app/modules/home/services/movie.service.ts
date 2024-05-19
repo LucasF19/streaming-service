@@ -21,7 +21,7 @@ export class MovieService {
     });
   }
 
-  getMoviesByGenre(genreId: number): Observable<any> {
+  getMoviesByGenre(genreId: any): Observable<any> {
     return this.http.get(`${this.apiUrl}/discover/movie`, {
       params: {
         api_key: this.apiKey,
@@ -41,6 +41,24 @@ export class MovieService {
         language: this.language,
         'primary_release_date.gte': oneYearAgo,
         'primary_release_date.lte': today,
+      }
+    });
+  }
+
+  getTypesList(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/genre/movie/list`, {
+      params: {
+        api_key: this.apiKey,
+        language: this.language
+      }
+    });
+  }
+
+  getMovieDetails(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${id}`, {
+      params: {
+        api_key: this.apiKey,
+        language: this.language
       }
     });
   }
