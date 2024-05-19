@@ -1,3 +1,85 @@
-cards-movies{
-  
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin-right: 10px;
+}
+
+.movie-card {
+  min-width: 200px;
+  max-width: 200px;
+}
+
+footer {
+  background-color: #1e2035;
+  color: #bbbbbb;
+  text-align: center;
+  margin-top: 35px;
+}
+
+footer a {
+  color: #63b3ed;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .social-icons {
+  margin-top: 10px;
+}
+
+footer .social-icons i {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+footer .social-icons i:hover {
+  color: #63b3ed;
+}
+
+i-feather {
+  width: 20px;
+  // fill: #1e2035;
+}
+
+.icon-round {
+  background-color: #fff;
+  padding: 8px 8px 4px 8px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.icon-round a {
+  color: #1e2035;
+  margin: 0;
+  font-size: 10px;
+}
+
+.attention-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1rem;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 12%;
+    bottom: -7px;
+    transform: translateX(-50%);
+    width: 25%;
+    height: 4px;
+    background: #c9c9c9;
+    border-radius: 2px;
+  }
 }
