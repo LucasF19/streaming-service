@@ -9,6 +9,13 @@ import {
   Github,
   Instagram,
   Linkedin,
+  Star,
+  Play,
+  ArrowLeft,
+  ArrowRight,
+  Pause,
+  MessageCircle,
+  Meh
 } from 'angular-feather/icons';
 
 import { MovieCardComponent, TitleComponent } from './components';
@@ -19,6 +26,13 @@ const icons = {
   Github,
   Instagram,
   Linkedin,
+  Star,
+  Play,
+  ArrowLeft,
+  ArrowRight,
+  Pause,
+  MessageCircle,
+  Meh
 };
 
 import { HttpClientModule } from '@angular/common/http';

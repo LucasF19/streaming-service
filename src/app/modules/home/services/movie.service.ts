@@ -62,4 +62,16 @@ export class MovieService {
       }
     });
   }
+
+  getMovieCredits(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/credits?api_key=${this.apiKey}`);
+  }
+
+  getSimilarMovies(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/similar?api_key=${this.apiKey}`);
+  }
+
+  getMovieReviews(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/reviews?api_key=${this.apiKey}`);
+  }
 }
