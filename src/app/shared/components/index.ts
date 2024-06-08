@@ -1,3 +1,3 @@
-export * from './title/title.component'
 export * from './card/card.component'
+export * from './modal/watch-modal.component'
 

@@ -1,2 +1,114 @@
-<h1>{{movieDetails.original_title}}</h1>
-<p>{{movieDetails.overview}}</p>
+<div class="movie-detail">
+  <ng-container *ngIf="movieDetails?.videos?.results?.length; else imageTemplate">
+    <iframe
+      width="560"
+      height="315"
+      [src]="'https://www.youtube.com/embed/' + movieDetails?.videos.results[0].key"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      title="movie"
+    ></iframe>
+  </ng-container>
+  <ng-template #imageTemplate class="image-container">
+    <div class="relative">
+      <img
+        [src]="movieDetails?.poster_path ? 'https://image.tmdb.org/t/p/w500' + movieDetails?.poster_path : 'https://via.placeholder.com/150'"
+        [alt]="movieDetails?.poster_path"
+        class="movie-image"
+      />
+    <div class="gradient-overlay"></div>
+    </div>
+    <i-feather name="arrow-left" class="mr-1 absolute top-6 left-5 text-[#e0e0e0]" style="width: 40px !important;" (click)="goLastPage()"></i-feather>
+    <i-feather name="x" class="mr-1 absolute top-6 right-3 text-[#e0e0e0]" style="width: 40px !important;" (click)="goHome()"></i-feather>
+  </ng-template>
+  
+  <div class="py-5">
+    <div class="px-5 mb-5 description-content">
+      <h1 class="pb-1">{{ movieDetails?.title }}</h1>
+      <p>
+        <strong>{{ getReleaseYear(movieDetails?.release_date) }}</strong> - {{ movieDetails?.genres[0].name }} | {{ convertRuntime(movieDetails?.runtime) }}
+      </p>
+      <div class="rating pt-2 pb-4">
+        <span *ngFor="let star of [2, 4, 6, 8, 10]">
+          <i-feather name="star" class="fill-star mr-1" [class.filled]="star <= movieDetails?.vote_average"></i-feather>
+        </span>
+        {{ movieDetails?.vote_average.toFixed(1) }}
+      </div>
+      <h2 class="mb-1">Sinopse</h2>
+      <p class="text-justify">{{ movieDetails?.overview }}</p>
+    </div>
+
+    <div class="pl-5 pr-4 mb-5">
+      <h2 class="mb-4">Gêneros</h2>
+      <span class="flex flex-wrap">
+        <span *ngFor="let genre of movieDetails?.genres" class="bg-[#5153D8] flex grow justify-center mb-4 text-white text-sm font-medium me-2 px-3 py-2 rounded-full dark:bg-purple-900 dark:text-purple-300">{{genre.name}}</span>
+      </span>
+    </div>
+
+    <div>
+      <h2 class="pl-5 mb-4">Similares</h2>
+      <movie-card size="normal" [isLoading]="isLoading" [movies]="similarMovies"></movie-card>
+    </div>
+
+    <div class="mb-5 my-5">
+      <h2 class="pl-5 mb-4">Elenco</h2>
+      <div class="company-carrosel">
+        <div class="companies ml-5 flex justify-around px-2 company-item">
+          <div class="company mr-[2.25rem]" *ngFor="let actor of cast">
+            <img [src]="actor?.profile_path ? 'https://image.tmdb.org/t/p/w500' + actor?.profile_path : 'https://via.placeholder.com/550'" alt="{{ actor?.original_name }}" />
+            <p><strong>{{ actor?.original_name }}</strong></p>
+            <span>{{ truncateContent(actor?.character, 5)  }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-5">
+      <h2 class="pl-5 mb-4">Comentários</h2>
+      <div *ngIf="reviews" class="company-carrosel overflow-y-hidden flex pl-4 pr-4">
+        <div *ngFor="let author of reviews" class="comments-card company-item transition-all duration-500 ease-in-out" [ngStyle]="{ height: isExpanded[author.id] ? 'auto' : '350px' }">
+          <div class="flex justify-between items-start mb-5">
+            <div class="flex">
+              <img
+              class="rounded-3xl"
+              [src]="author?.author_details.avatar_path ? 'https://image.tmdb.org/t/p/w500' + author?.author_details.avatar_path : 'https://cdn-icons-png.flaticon.com/512/4322/4322991.png'"
+              alt="User">
+              <div class="ml-4">
+                <h2 class="text-lg leading-none">{{author.author_details.name === "" ? "User" : author.author_details.name}}</h2>
+                <span class="text-xs leading-none">{{author?.created_at | date: 'dd \'de\' MMMM \'de\' yyyy'}}</span>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <span>{{author.author_details.rating && author.author_details.rating + ".0"}}</span>
+              <i-feather name="star" class="fill-star filled ml-1"></i-feather>
+            </div>
+          </div>
+          <div class="content">
+            <p>
+              {{ isExpanded[author.id] ? author.content : truncateContent(author.content, 350) }}
+              <span class="text-[#8e90ff] underline" *ngIf="author.content.split('').length > 350" (click)="toggleReadMore(author.id)">
+                {{ isExpanded[author.id] ? 'Ler menos' : 'Ler mais' }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="reviews.length === 0">
+        <div class="comments-card justify-center flex items-center h-40 w-96 ml-5" style="margin-left: 20px !important; width: 375px !important;">
+          <i-feather name="frown" class="fill mr-2"></i-feather>
+          <span>Não há comentários disponíveis!</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-5">
+      <button (click)="getWatchProviders()" class="bg-[#5153D8] text-lg text-white py-3 px-4 justify-center rounded-3xl border-none w-full inline-flex items-center">
+        <i-feather name="play" class="fill-play mr-2"></i-feather>
+        <span>Onde assistir</span>
+      </button>
+    </div>
+
+    <watch-modal *ngIf="showModal" [movieName]="movieDetails?.title" [providers]="watchProviders" (close)="onCloseModal()"></watch-modal>
+  </div>
+</div>

@@ -9,9 +9,20 @@ import {
   Github,
   Instagram,
   Linkedin,
+  Star,
+  Play,
+  ArrowLeft,
+  ArrowRight,
+  Pause,
+  MessageCircle,
+  Frown,
+  Bookmark,
+  CornerUpLeft,
+  ChevronLeft,
+  X
 } from 'angular-feather/icons';
 
-import { MovieCardComponent, TitleComponent } from './components';
+import { MovieCardComponent, WhereToWatchModalComponent } from './components';
 
 const icons = {
   Camera,
@@ -19,12 +30,23 @@ const icons = {
   Github,
   Instagram,
   Linkedin,
+  Star,
+  Play,
+  ArrowLeft,
+  ArrowRight,
+  Pause,
+  MessageCircle,
+  Frown,
+  Bookmark,
+  CornerUpLeft,
+  ChevronLeft,
+  X
 };
 
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [TitleComponent, MovieCardComponent],
+  declarations: [MovieCardComponent, WhereToWatchModalComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -35,9 +57,9 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    TitleComponent,
     MovieCardComponent,
     FeatherModule,
+    WhereToWatchModalComponent
   ],
   providers: [],
 })
