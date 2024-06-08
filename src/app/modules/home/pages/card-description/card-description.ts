@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { Genre } from '../../interfaces/home-interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { convertRuntime } from 'src/app/shared/formatters/currect-hour';
+import { WhereToWatchModalComponent } from 'src/app/shared/components';
 
 @Component({
   selector: 'card-description',
@@ -17,10 +19,14 @@ export class CardDescription implements OnInit {
   movieId!: string;
   movieDetails: any;
   isExpanded: any = {};
+  watchProviders: any;
+  showModal = false;
+  providersList: any;
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -73,7 +79,6 @@ export class CardDescription implements OnInit {
     this.movieService.getMovieReviews(movieId).subscribe({
       next: (reviews) => {
         this.reviews = reviews.results;
-        console.log(reviews)
       },
       error: (error) => {
         console.error('Error fetching movie reviews:', error);
@@ -82,9 +87,9 @@ export class CardDescription implements OnInit {
   }
 
   truncateContent(content: string, wordLimit: number): string {
-    const words = content.split(' ');
+    const words = content.split('');
     if (words.length > wordLimit) {
-      return words.slice(0, wordLimit).join(' ') + '...';
+      return words.slice(0, wordLimit).join('') + '...';
     }
     return content;
   }
@@ -93,13 +98,30 @@ export class CardDescription implements OnInit {
     this.isExpanded[id] = !this.isExpanded[id];
   }
 
+  getWatchProviders() {
+    this.movieService.getWatchProviders(this.movieId).subscribe(data => {
+      this.watchProviders = data.results.BR?.buy;
+      this.showModal = true;
+    });
+  }
+
+  onCloseModal() {
+    this.showModal = false;
+  }
+
+  goLastPage(){
+    window.history.back();
+  }
+
+  goHome(){
+    this.router.navigate(['/']);
+  }
+
   getReleaseYear(dateString: string): number {
     return new Date(dateString).getFullYear();
   }
 
-  convertRuntime(minutes: number): string {
-    const hours = Math.floor(minutes / 60);
-    const remainingMinutes = minutes % 60;
-    return `${hours}h ${remainingMinutes}min`;
+  convertRuntime(runtime: number): string {
+    return convertRuntime(runtime);
   }
 }

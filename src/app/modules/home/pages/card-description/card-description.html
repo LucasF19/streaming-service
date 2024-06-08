@@ -10,14 +10,18 @@
     ></iframe>
   </ng-container>
   <ng-template #imageTemplate class="image-container">
-    <img
-      [src]="movieDetails?.poster_path ? 'https://image.tmdb.org/t/p/w500' + movieDetails?.poster_path : 'https://via.placeholder.com/150'"
-      [alt]="movieDetails?.poster_path"
-      class="movie-image"
-    />
+    <div class="relative">
+      <img
+        [src]="movieDetails?.poster_path ? 'https://image.tmdb.org/t/p/w500' + movieDetails?.poster_path : 'https://via.placeholder.com/150'"
+        [alt]="movieDetails?.poster_path"
+        class="movie-image"
+      />
     <div class="gradient-overlay"></div>
+    </div>
+    <i-feather name="arrow-left" class="mr-1 absolute top-6 left-5 text-[#e0e0e0]" style="width: 40px !important;" (click)="goLastPage()"></i-feather>
+    <i-feather name="x" class="mr-1 absolute top-6 right-3 text-[#e0e0e0]" style="width: 40px !important;" (click)="goHome()"></i-feather>
   </ng-template>
-
+  
   <div class="py-5">
     <div class="px-5 mb-5 description-content">
       <h1 class="pb-1">{{ movieDetails?.title }}</h1>
@@ -30,7 +34,15 @@
         </span>
         {{ movieDetails?.vote_average.toFixed(1) }}
       </div>
+      <h2 class="mb-1">Sinopse</h2>
       <p class="text-justify">{{ movieDetails?.overview }}</p>
+    </div>
+
+    <div class="pl-5 pr-4 mb-5">
+      <h2 class="mb-4">Gêneros</h2>
+      <span class="flex flex-wrap">
+        <span *ngFor="let genre of movieDetails?.genres" class="bg-[#5153D8] flex grow justify-center mb-4 text-white text-sm font-medium me-2 px-3 py-2 rounded-full dark:bg-purple-900 dark:text-purple-300">{{genre.name}}</span>
+      </span>
     </div>
 
     <div>
@@ -42,10 +54,10 @@
       <h2 class="pl-5 mb-4">Elenco</h2>
       <div class="company-carrosel">
         <div class="companies ml-5 flex justify-around px-2 company-item">
-          <div class="company pr-5" *ngFor="let actor of cast">
+          <div class="company mr-[2.25rem]" *ngFor="let actor of cast">
             <img [src]="actor?.profile_path ? 'https://image.tmdb.org/t/p/w500' + actor?.profile_path : 'https://via.placeholder.com/550'" alt="{{ actor?.original_name }}" />
             <p><strong>{{ actor?.original_name }}</strong></p>
-            <span>{{ actor?.character }}</span>
+            <span>{{ truncateContent(actor?.character, 5)  }}</span>
           </div>
         </div>
       </div>
@@ -53,7 +65,7 @@
 
     <div class="mb-5">
       <h2 class="pl-5 mb-4">Comentários</h2>
-      <div *ngIf="reviews" class="company-carrosel overflow-y-hidden flex pl-4">
+      <div *ngIf="reviews" class="company-carrosel overflow-y-hidden flex pl-4 pr-4">
         <div *ngFor="let author of reviews" class="comments-card company-item transition-all duration-500 ease-in-out" [ngStyle]="{ height: isExpanded[author.id] ? 'auto' : '350px' }">
           <div class="flex justify-between items-start mb-5">
             <div class="flex">
@@ -63,38 +75,40 @@
               alt="User">
               <div class="ml-4">
                 <h2 class="text-lg leading-none">{{author.author_details.name === "" ? "User" : author.author_details.name}}</h2>
-                <span class="text-xs leading-none">{{author.created_at}}</span>
+                <span class="text-xs leading-none">{{author?.created_at | date: 'dd \'de\' MMMM \'de\' yyyy'}}</span>
               </div>
             </div>
             <div class="flex items-center">
-              <span>{{author.author_details.rating}}</span>
+              <span>{{author.author_details.rating && author.author_details.rating + ".0"}}</span>
               <i-feather name="star" class="fill-star filled ml-1"></i-feather>
             </div>
           </div>
           <div class="content">
             <p>
-              {{ isExpanded[author.id] ? author.content : truncateContent(author.content, 50) }}
+              {{ isExpanded[author.id] ? author.content : truncateContent(author.content, 350) }}
+              <span class="text-[#8e90ff] underline" *ngIf="author.content.split('').length > 350" (click)="toggleReadMore(author.id)">
+                {{ isExpanded[author.id] ? 'Ler menos' : 'Ler mais' }}
+              </span>
             </p>
-            <span class="text-[#8e90ff] underline" *ngIf="author.content.split('').length > 50" (click)="toggleReadMore(author.id)">
-              {{ isExpanded[author.id] ? 'Ler menos' : 'Ler mais' }}
-            </span>
           </div>
         </div>
       </div>
 
       <div *ngIf="reviews.length === 0">
         <div class="comments-card justify-center flex items-center h-40 w-96 ml-5" style="margin-left: 20px !important; width: 375px !important;">
-          <i-feather name="meh" class="fill mr-2"></i-feather>
+          <i-feather name="frown" class="fill mr-2"></i-feather>
           <span>Não há comentários disponíveis!</span>
         </div>
       </div>
     </div>
 
     <div class="px-5">
-      <button class="bg-[#5153D8] text-lg text-white py-3 px-4 justify-center rounded-3xl border-none w-full inline-flex items-center">
+      <button (click)="getWatchProviders()" class="bg-[#5153D8] text-lg text-white py-3 px-4 justify-center rounded-3xl border-none w-full inline-flex items-center">
         <i-feather name="play" class="fill-play mr-2"></i-feather>
         <span>Onde assistir</span>
       </button>
     </div>
+
+    <watch-modal *ngIf="showModal" [movieName]="movieDetails?.title" [providers]="watchProviders" (close)="onCloseModal()"></watch-modal>
   </div>
 </div>
