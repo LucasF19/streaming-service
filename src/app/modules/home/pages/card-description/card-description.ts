@@ -100,7 +100,8 @@ export class CardDescription implements OnInit {
 
   getWatchProviders() {
     this.movieService.getWatchProviders(this.movieId).subscribe(data => {
-      this.watchProviders = data.results.BR?.buy;
+      const { buy, flatrate, rent } = data.results.BR || {};
+      this.watchProviders = buy || flatrate || rent;
       this.showModal = true;
     });
   }
