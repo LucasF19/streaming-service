@@ -21,7 +21,7 @@ export class MovieService {
     });
   }
 
-  getMoviesByGenre(genreId: number): Observable<any> {
+  getMoviesByGenre(genreId: any): Observable<any> {
     return this.http.get(`${this.apiUrl}/discover/movie`, {
       params: {
         api_key: this.apiKey,
@@ -43,5 +43,39 @@ export class MovieService {
         'primary_release_date.lte': today,
       }
     });
+  }
+
+  getTypesList(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/genre/movie/list`, {
+      params: {
+        api_key: this.apiKey,
+        language: this.language
+      }
+    });
+  }
+
+  getMovieDetails(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${id}`, {
+      params: {
+        api_key: this.apiKey,
+        language: this.language
+      }
+    });
+  }
+
+  getMovieCredits(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/credits?api_key=${this.apiKey}`);
+  }
+
+  getSimilarMovies(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/similar?api_key=${this.apiKey}`);
+  }
+
+  getMovieReviews(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/reviews?api_key=${this.apiKey}`);
+  }
+
+  getWatchProviders(movieId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/movie/${movieId}/watch/providers?api_key=${this.apiKey}`);
   }
 }
