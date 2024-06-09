@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MovieService } from '../../services/movie.service';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +9,18 @@ import { MovieService } from '../../services/movie.service';
   styleUrl: './home.scss',
 })
 export class AppHome implements OnInit{
+  nomeUsuario: string = '';
+  
   releasesMovies = [];
   actionMovies = [];
   animationMovies = [];
   avatar = '/docs/images/people/profile-picture-5.jpg';
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private authService: AuthService, private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
+    this.carregarNomeUsuario();
+    
     this.getAllMovies();
     this.getAnimationMovies();
     this.getActionMovies();
@@ -37,4 +43,20 @@ export class AppHome implements OnInit{
       this.actionMovies = data.results;
     });
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  async carregarNomeUsuario() {
+    const user = await this.afAuth.currentUser;
+    if (user) {
+      const uid = user.uid;
+      const nome = await this.authService.getNomeUsuario(uid);
+      if (nome) {
+        this.nomeUsuario = nome;
+      }
+    }
+  }
+
 }

@@ -1,0 +1,66 @@
+span{
+    color: #5153D8;
+}
+
+h2 {
+    text-align: center;
+    color: #f8f8f8;
+    font-size: 55px;
+    margin-bottom: 70px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.inputs-box input{
+    width: 323px;
+    height: 40px;
+    display: flex;
+    border-radius: 20px;
+    font-size: 16px;
+    padding: 10px 15px;
+    color: #f8f8f8;
+    background-color: #474966;
+    margin-top: 7px;
+}
+
+.box{
+    margin-bottom: 25px;
+}
+
+.inputs-box label{
+    color: #f8f8f8;
+}
+
+.inputs-box button {
+    border-radius: 20px;
+    width: 323px;
+    background-color: #5153D8;
+    color: #F8F8F8;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #5457ee;
+}
+
+.register-link {
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #f8f8f8;
+}
+
+p {
+    color: #808080 ;
+    font-size: 14px;
+}
