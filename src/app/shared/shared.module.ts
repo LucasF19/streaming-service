@@ -27,7 +27,12 @@ import {
   Users
 } from 'angular-feather/icons';
 
-import { MovieCardComponent, WhereToWatchModalComponent, MobileTabsComponent } from './components';
+import { 
+  MovieCardComponent, 
+  WhereToWatchModalComponent, 
+  MobileTabsComponent, 
+  FavoriteCardComponent 
+} from './components';
 
 const icons = {
   Home,
@@ -54,15 +59,22 @@ const icons = {
 };
 
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [MovieCardComponent, WhereToWatchModalComponent, MobileTabsComponent],
+  declarations: [
+    MovieCardComponent, 
+    WhereToWatchModalComponent, 
+    MobileTabsComponent, 
+    FavoriteCardComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     FeatherModule.pick(icons),
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     FormsModule,
@@ -70,7 +82,8 @@ import { HttpClientModule } from '@angular/common/http';
     MovieCardComponent,
     FeatherModule,
     WhereToWatchModalComponent,
-    MobileTabsComponent
+    MobileTabsComponent,
+    FavoriteCardComponent
   ],
   providers: [],
 })

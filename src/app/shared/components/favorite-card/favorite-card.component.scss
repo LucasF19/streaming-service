@@ -1,0 +1,15 @@
+.list-type li{
+  margin-bottom: 5px;
+  color: #d8d8d8;
+}
+
+i-feather {
+  &.fill-star {
+    stroke: none;
+    fill: #CCCCCC;
+
+    &.filled {
+      fill: #ffd700;
+    }
+  }
+}

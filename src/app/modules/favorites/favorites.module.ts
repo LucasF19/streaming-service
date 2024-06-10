@@ -2,20 +2,18 @@ import { NgModule, LOCALE_ID } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CommonModule, registerLocaleData } from "@angular/common";
 import { SharedModule } from "src/app/shared/shared.module";
-import { AppHome } from "../home/pages/home/home";
 import { MovieService } from "../home/services/movie.service";
 import localePt from '@angular/common/locales/pt';
+import { FavoritesPage } from "./pages/favorites/favorites";
 
 registerLocaleData(localePt);
 
 export const routes: Routes = [
-  { path: 'favorites', component: AppHome },
+  { path: '', component: FavoritesPage },
 ];
 
 @NgModule({
-  declarations: [
-    AppHome,
-  ],
+  declarations: [FavoritesPage],
   providers: [
     MovieService,
     { provide: LOCALE_ID, useValue: 'pt' },

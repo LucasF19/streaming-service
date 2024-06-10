@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Genre } from '../../interfaces/home-interface';
+import { Genre, Movie } from '../../interfaces/home-interface';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { Router } from '@angular/router';
-
-export interface Movie {
-  title: string;
-  id: string;
-}
 
 @Component({
   selector: 'app-home',

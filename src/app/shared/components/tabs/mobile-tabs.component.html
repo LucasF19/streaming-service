@@ -1,16 +1,16 @@
 <div class="tabs-container">
   <nav class="mobile-tabs">
     <ul>
-      <li routerLinkActive="active">
-        <i-feather name="Home" class=""></i-feather>
+      <li routerLinkActive="active" [routerLink]="['/']">
+        <i-feather name="Home"></i-feather>
         <span>Início</span>
       </li>
-      <li routerLinkActive="active">
-        <i-feather name="Bookmark" class=""></i-feather>
+      <li routerLinkActive="active" [routerLink]="['/favorites']">
+        <i-feather name="Bookmark"></i-feather>
         <span>Favoritos</span>
       </li>
       <li routerLinkActive="active">
-        <i-feather name="log-out" class=""></i-feather>
+        <i-feather name="log-out" ></i-feather>
         <span>Sair</span>
       </li>
     </ul>

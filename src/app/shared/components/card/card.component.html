@@ -1,5 +1,5 @@
 <div class="carousel-container" *ngIf="!isLoading">
-  <div class="flex carousel-item" *ngIf="size !== 'large' && size !== 'grid'">
+  <div class="flex carousel-item" *ngIf="size !== 'large'">
     <div class="card-movie" *ngFor="let movie of movies" (click)="onClickMovie(movie.id)">
       <img
       [src]="getPosterPath(movie)"
