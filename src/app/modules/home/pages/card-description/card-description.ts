@@ -3,7 +3,6 @@ import { MovieService } from '../../services/movie.service';
 import { Genre } from '../../interfaces/home-interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { convertRuntime } from 'src/app/shared/formatters/currect-hour';
-import { WhereToWatchModalComponent } from 'src/app/shared/components';
 
 @Component({
   selector: 'card-description',

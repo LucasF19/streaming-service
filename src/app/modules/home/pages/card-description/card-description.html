@@ -57,7 +57,7 @@
           <div class="company mr-[2.25rem]" *ngFor="let actor of cast">
             <img [src]="actor?.profile_path ? 'https://image.tmdb.org/t/p/w500' + actor?.profile_path : 'https://via.placeholder.com/550'" alt="{{ actor?.original_name }}" />
             <p><strong>{{ actor?.original_name }}</strong></p>
-            <span>{{ truncateContent(actor?.character, 5)  }}</span>
+            <span>{{ truncateContent(actor?.character, 30)  }}</span>
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@
       </div>
     </div>
 
-    <div class="px-5">
+    <div class="px-5 pb-[80px]">
       <button (click)="getWatchProviders()" class="bg-[#5153D8] text-lg text-white py-3 px-4 justify-center rounded-3xl border-none w-full inline-flex items-center">
         <i-feather name="play" class="fill-play mr-2"></i-feather>
         <span>Onde assistir</span>

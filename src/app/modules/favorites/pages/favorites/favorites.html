@@ -1,0 +1,25 @@
+<div class="background-content pb-[70px] px-5 pt-7 min-h-[100vh]">
+  <div class="flex justify-between items-center mb-10">
+    <h2 class="text-gray-100 font-light">
+      Olá, <br />
+      <span class="font-bold">Rebecca Hintz</span>
+    </h2>
+    <img
+      class="w-11 h-11 rounded-full"
+      src="https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
+      alt="Rounded avatar"
+    />
+  </div>
+
+  <div>
+    <h1 class="mb-4 text-white text-[28px]">Favoritos</h1>
+    <div>
+      <favorite-card [isLoading]="isLoading" [movies]="result"></favorite-card>
+    </div>
+
+    <div  *ngIf="result.length === 0" class="text-white flex items-center justify-center py-3 px-5 bg-[#191b2e] rounded-full">
+      <i-feather name="heart" class="mr-5 heart-style"></i-feather>
+      <h3 class="text-[#e1e1e1]">Você ainda não adicionou nenhum filme.</h3>
+    </div>
+  </div>
+</div>

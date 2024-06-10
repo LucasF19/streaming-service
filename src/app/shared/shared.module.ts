@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FeatherModule } from 'angular-feather';
 import {
+  Home,
   Camera,
   Heart,
   Github,
@@ -19,12 +20,22 @@ import {
   Bookmark,
   CornerUpLeft,
   ChevronLeft,
-  X
+  X,
+  Search,
+  LogOut,
+  Tv,
+  Users
 } from 'angular-feather/icons';
 
-import { MovieCardComponent, WhereToWatchModalComponent } from './components';
+import { 
+  MovieCardComponent, 
+  WhereToWatchModalComponent, 
+  MobileTabsComponent, 
+  FavoriteCardComponent 
+} from './components';
 
 const icons = {
+  Home,
   Camera,
   Heart,
   Github,
@@ -40,26 +51,39 @@ const icons = {
   Bookmark,
   CornerUpLeft,
   ChevronLeft,
-  X
+  X,
+  Search,
+  LogOut,
+  Tv,
+  Users
 };
 
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  declarations: [MovieCardComponent, WhereToWatchModalComponent],
+  declarations: [
+    MovieCardComponent, 
+    WhereToWatchModalComponent, 
+    MobileTabsComponent, 
+    FavoriteCardComponent
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     FeatherModule.pick(icons),
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
     MovieCardComponent,
     FeatherModule,
-    WhereToWatchModalComponent
+    WhereToWatchModalComponent,
+    MobileTabsComponent,
+    FavoriteCardComponent
   ],
   providers: [],
 })

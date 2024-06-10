@@ -1,0 +1,40 @@
+<div *ngIf="!isLoading">
+  <div>
+    <div *ngFor="let movie of movies" (click)="onClickMovie(movie.id)" class="rounded-lg mb-5 flex w-full bg-[#252741]">
+      <img
+        [src]="getPosterPath(movie)"
+        class="card-img-top card-movie-large w-[150px] object-cover rounded-l-lg"
+        alt="Movie Poster"
+      />
+      <div class="text-white p-4 flex flex-col">
+        <div class="mb-10">
+          <h2 class="text-[24px] mb-3">{{movie.title}}</h2>
+          <ul class="list-none list-type">
+            <li>Gênero: <strong>{{movie.genres[0].name}}</strong></li>
+            <li>Duração: <strong>{{convertRuntime(movie?.runtime)}}</strong></li>
+            <li>Produção: <strong>{{movie.production_companies[0].name}}</strong></li>
+          </ul>
+        </div>
+        <div>
+          <div class="flex items-center mb-1 text-sm">
+            <i-feather name="users" class="mr-2" style="width: 20px;"></i-feather>
+            <span>{{movie.popularity}} assistiram</span>
+          </div>
+          <div class="flex items-center">
+            <span *ngFor="let star of [2, 4, 6, 8, 10]">
+              <i-feather name="star" class="fill-star mr-1" [class.filled]="star <= movie?.vote_average"></i-feather>
+            </span>
+            <span>( {{ movie?.vote_average.toFixed(1) }} )</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    *ngIf="isLoading"
+    class="flex items-center justify-center h-52 mr-5 ml-5 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700"
+  >
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>

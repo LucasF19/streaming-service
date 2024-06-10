@@ -1,4 +1,4 @@
-<div class="home-content">
+<div class="background-content">
   <div class="mx-5 pt-7 mb-4">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-gray-100 font-light">
@@ -44,7 +44,29 @@
           id="search"
           class="block w-full p-3 ps-10 text-sm text-gray-900 border-none rounded-2xl bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Pesquisar"
+          [formControl]="searchControl"
         />
+        <div *ngIf="searching">
+          <div class="absolute bg-[#1e2035] mr-5 w-full z-10 rounded-[10px] mt-3 p-3 pb-0 h-[500px] overflow-scroll">
+            <div *ngIf="!emptyFilter">
+              <div *ngFor="let filtered of filteredMovies" (click)="movieSelectSearch(filtered.id)" class="flex pb-4">
+                <img
+                  class="w-[70px] mr-4 rounded-2xl object-cover"
+                  [src]="filtered?.backdrop_path ? 'https://image.tmdb.org/t/p/w500' + filtered?.backdrop_path : 'https://via.placeholder.com/150'"
+                  alt="movie">
+                <div class="filter-card">
+                  <h2>{{filtered.title}}</h2>
+                  <h3>{{filtered.release_date | date: 'dd \'de\' MMMM \'de\' yyyy'}}</h3>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="emptyFilter" class="text-white flex justify-center m-3 items-center">
+              <i-feather name="Frown" class="mr-3 "></i-feather>
+              <span class="text-lg">Filme não encontrado!</span>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>
