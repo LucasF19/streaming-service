@@ -16,11 +16,29 @@
   max-width: 200px;
 }
 
+.filter-card{
+  margin-top: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.filter-card h2{
+  color: #ececec;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.filter-card h3{
+  color: #c1c1c1;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 footer {
   background-color: #1e2035;
   color: #bbbbbb;
   text-align: center;
   margin-top: 35px;
+  padding-bottom: 100px;
 }
 
 footer a {
@@ -78,7 +96,7 @@ i-feather {
     transform: translateX(-50%);
     width: 25%;
     height: 4px;
-    background: #c9c9c9;
+    background: #5153d8;
     border-radius: 2px;
   }
 }

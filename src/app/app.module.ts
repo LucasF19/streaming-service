@@ -9,8 +9,11 @@ import { AuthService } from './modules/services/auth.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,13 +22,15 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    SharedModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthService, // Adicione o AuthService aqui
-    AuthGuard // Adicione o AuthGuard aqui
+    AuthService,
+    AuthGuard 
   ],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}

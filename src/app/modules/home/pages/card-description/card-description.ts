@@ -3,7 +3,7 @@ import { MovieService } from '../../services/movie.service';
 import { Genre } from '../../interfaces/home-interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { convertRuntime } from 'src/app/shared/formatters/currect-hour';
-import { WhereToWatchModalComponent } from 'src/app/shared/components';
+import { FavoriteService } from 'src/app/modules/favorites/services/favorites.service';
 
 @Component({
   selector: 'card-description',
@@ -22,11 +22,13 @@ export class CardDescription implements OnInit {
   watchProviders: any;
   showModal = false;
   providersList: any;
+  favorite!: boolean; 
 
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
     private router: Router,
+    private favoriteService: FavoriteService,
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,6 @@ export class CardDescription implements OnInit {
         this.getComments(id);
       },
       error: (error) => {
-        console.error('Error fetching movie details:', error);
         this.isLoading = false;
       }
     });
@@ -57,7 +58,6 @@ export class CardDescription implements OnInit {
           this.isLoading = false;
         },
         error: (error) => {
-          console.error('Error fetching similar movies:', error);
           this.isLoading = false;
         }
       });
@@ -104,6 +104,15 @@ export class CardDescription implements OnInit {
       this.watchProviders = buy || flatrate || rent;
       this.showModal = true;
     });
+  }
+
+  toggleFavorite() {
+    this.favorite = !this.favorite;
+    if (this.favorite) {
+      this.favoriteService.addFavorite(this.movieDetails);
+    } else {
+      this.favoriteService.removeFavorite(this.movieDetails);
+    }
   }
 
   onCloseModal() {
