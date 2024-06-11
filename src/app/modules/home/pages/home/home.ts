@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MovieService } from '../../services/movie.service';
+import { AuthService } from '../../../services/auth.service';
 import { Genre, Movie } from '../../interfaces/home-interface';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs';
@@ -10,7 +12,9 @@ import { Router } from '@angular/router';
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
+
 export class AppHome implements OnInit {
+  nomeUsuario: string = '';
   searchControl: FormControl = new FormControl('');
   releasesMovies: any[] = [];
   genresMovies: { [key: string]: any[] } = {};
@@ -22,9 +26,10 @@ export class AppHome implements OnInit {
 
   typesMovie: Genre[] = [];
 
-  constructor(private movieService: MovieService, private router: Router) { }
+  constructor(private movieService: MovieService, private authService: AuthService, private afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit(): void {
+    this.carregarNomeUsuario();
     this.getTypesList();
     this.getAllMovies();
 
@@ -91,4 +96,20 @@ export class AppHome implements OnInit {
       this.isLoading = false;
     });
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  async carregarNomeUsuario() {
+    const user = await this.afAuth.currentUser;
+    if (user) {
+      const uid = user.uid;
+      const nome = await this.authService.getNomeUsuario(uid);
+      if (nome) {
+        this.nomeUsuario = nome;
+      }
+    }
+  }
+
 }
