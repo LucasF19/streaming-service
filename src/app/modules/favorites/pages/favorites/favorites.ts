@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieService } from 'src/app/modules/home/services/movie.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { FavoriteService } from '../../services/favorites.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'favorites-page',
@@ -8,13 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./favorites.scss'],
 })
 export class FavoritesPage implements OnInit {
-  result: any;
-  isLoading!: boolean;
+  favoriteMovies: any[] = [];
+  isLoading = true;
 
-  constructor(private movieService: MovieService, private router: Router) {}
+  constructor(private favoriteService: FavoriteService, private router: Router) {}
 
   ngOnInit(): void {
+    this.loadFavorites();
+  }
+
+  loadFavorites(){
+    const favorites = this.favoriteService.getFavorites();
+
+    this.favoriteMovies = favorites.filter(movie => movie.id);
     this.isLoading = false;
-    this.result = [];
   }
 }

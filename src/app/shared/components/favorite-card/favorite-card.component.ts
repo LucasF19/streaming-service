@@ -9,7 +9,7 @@ import { convertRuntime } from '../../formatters/currect-hour';
   styleUrl: './favorite-card.component.scss'
 })
 export class FavoriteCardComponent{
-  @Input() movies!:any;
+  @Input() movies: any = [];
   @Input() isLoading!: boolean;
   result!: any;
 

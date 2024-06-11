@@ -63,7 +63,6 @@ i-feather {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  // background-color: white;
   object-fit: cover;
 }
 
@@ -123,4 +122,9 @@ i-feather {
 
 .comments-card p{
   line-height: 1.4;
+}
+
+.favorited{
+  stroke: #e9bf37 !important; 
+  fill: #e9bf37
 }
