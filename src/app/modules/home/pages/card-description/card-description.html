@@ -24,7 +24,12 @@
   
   <div class="py-5">
     <div class="px-5 mb-5 description-content">
-      <h1 class="pb-1">{{ movieDetails?.title }}</h1>
+      <div class="pb-1 flex items-start justify-between">
+        <h1 class="pr-4">{{ movieDetails?.title }}</h1>
+        <div class="rounded-full border-solid border-2 border-[#e0e0e0]" (click)="toggleFavorite()">
+          <i-feather class="m-4" name="bookmark" style="stroke: #e0e0e0;" [class.favorited]="favorite"></i-feather>
+        </div>
+      </div>
       <p>
         <strong>{{ getReleaseYear(movieDetails?.release_date) }}</strong> - {{ movieDetails?.genres[0].name }} | {{ convertRuntime(movieDetails?.runtime) }}
       </p>

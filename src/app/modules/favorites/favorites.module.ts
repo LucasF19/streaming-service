@@ -5,6 +5,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { MovieService } from "../home/services/movie.service";
 import localePt from '@angular/common/locales/pt';
 import { FavoritesPage } from "./pages/favorites/favorites";
+import { FavoriteService } from "./services/favorites.service";
 
 registerLocaleData(localePt);
 
@@ -16,6 +17,7 @@ export const routes: Routes = [
   declarations: [FavoritesPage],
   providers: [
     MovieService,
+    FavoriteService,
     { provide: LOCALE_ID, useValue: 'pt' },
   ],
   imports: [
