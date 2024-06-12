@@ -4,7 +4,7 @@ import { AuthGuard } from './modules/services/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
   },
   {
@@ -18,12 +18,15 @@ const routes: Routes = [
   {
     path: 'favorites',
     loadChildren: () => import('./modules/favorites/favorites.module').then(m => m.FavoritesModule)
+  },
+  {
+     path: '', redirectTo: '/login', pathMatch: 'full'
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

@@ -4,7 +4,6 @@ import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { environment } from '../environments/environment';
-import { AuthGuard } from './modules/services/auth.guard';
 import { AuthService } from './modules/services/auth.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,12 +22,11 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    AuthGuard 
   ],
   bootstrap: [AppComponent],
 })

@@ -1,66 +1,67 @@
-span{
-    color: #5153D8;
+span {
+  color: #5153d8;
 }
 
 h2 {
-    text-align: center;
-    color: #f8f8f8;
-    font-size: 55px;
-    margin-bottom: 70px;
+  text-align: center;
+  color: #f8f8f8;
+  font-size: 55px;
+  margin-bottom: 70px;
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.inputs-box input{
-    width: 323px;
-    height: 40px;
-    display: flex;
-    border-radius: 20px;
-    font-size: 16px;
-    padding: 10px 15px;
-    color: #f8f8f8;
-    background-color: #474966;
-    margin-top: 7px;
+.inputs-box input {
+  border: none;
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 10px 15px;
+  color: #f8f8f8;
+  background-color: #474966;
+  margin-top: 7px;
 }
 
-.box{
-    margin-bottom: 25px;
+.box {
+  margin-bottom: 25px;
 }
 
-.inputs-box label{
-    color: #f8f8f8;
+.inputs-box label {
+  color: #f8f8f8;
 }
 
 .inputs-box button {
-    border-radius: 20px;
-    width: 323px;
-    background-color: #5153D8;
-    color: #F8F8F8;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
+  border-radius: 20px;
+  background-color: #5153d8;
+  color: #f8f8f8;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  border: none;
+  width: 100%;
 }
 
 a {
-    text-decoration: none;
-    color: #5457ee;
+  text-decoration: none;
+  color: #5457ee;
 }
 
 .register-link {
-    position: fixed;
-    text-align: center;
-    bottom: 0;
-    padding: 10px 0;
-    font-size: 14px;
-    color: #f8f8f8;
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #f8f8f8;
 }
 
 p {
-    color: #808080 ;
-    font-size: 14px;
+  color: #808080;
+  font-size: 14px;
 }

@@ -14,11 +14,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getAuthState().subscribe(user => {
-      if (user) {
-        // Usuário está autenticado, redireciona para a página principal
-        this.router.navigate(['/']);
+      if (user) {        
+        this.router.navigate(['/home']);
       } else {
-        // Usuário não está autenticado, redireciona para a página de login
         this.router.navigate(['/login']);
       }
     });

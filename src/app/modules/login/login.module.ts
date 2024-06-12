@@ -13,9 +13,9 @@ export const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule.forChild(routes),  // Certifique-se de importar o RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [LoginPage],
-  exports: [RouterModule],  // Exporte o RouterModule
+  exports: [RouterModule],
 })
 export class LoginModule {}

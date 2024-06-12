@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-registro',
   templateUrl: 'registro.html',
-  styleUrls: ['registro.scss']
+  styleUrls: ['registro.scss'],
 })
 export class RegistroPage {
   nome: string = '';
@@ -16,7 +16,6 @@ export class RegistroPage {
   constructor(private authService: AuthService) {}
 
   registrarUsuario(registroForm: NgForm) {
-
     if (registroForm.invalid) {
       console.error('Erro: Campos inválidos');
       return;
@@ -29,11 +28,12 @@ export class RegistroPage {
       return;
     }
 
-    this.authService.registrarUsuario(email, senha, nome)
+    this.authService
+      .registrarUsuario(email, senha, nome)
       .then(() => {
         console.log('Usuário registrado com sucesso!');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Erro ao registrar o usuário:', error);
       });
   }
