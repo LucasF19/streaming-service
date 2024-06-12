@@ -1,18 +1,10 @@
 <div class="background-content pb-[70px] px-5 pt-7 min-h-[100vh]">
-  <div class="flex justify-between items-center mb-10">
-    <h2 class="text-gray-100 font-light">
-      Olá, <br />
-      <span class="font-bold">Rebecca Hintz</span>
-    </h2>
-    <img
-      class="w-11 h-11 rounded-full"
-      src="https://t4.ftcdn.net/jpg/05/49/98/39/360_F_549983970_bRCkYfk0P6PP5fKbMhZMIb07mCJ6esXL.jpg"
-      alt="Rounded avatar"
-    />
-  </div>
-
   <div>
-    <h1 class="mb-4 text-white text-[28px]">Favoritos</h1>
+    <div class="flex">
+      <i-feather name="Bookmark" class="bookmark-style mr-2"></i-feather>
+      <h1 class="mb-4 text-white text-[28px]">Favoritos</h1>
+    </div>
+    <hr class="border-solid border-2 border-[#3d4171] mb-5 w-[75%]">
     <div>
       <favorite-card [isLoading]="isLoading" [movies]="favoriteMovies"></favorite-card>
     </div>

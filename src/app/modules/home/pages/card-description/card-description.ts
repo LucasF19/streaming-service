@@ -110,8 +110,6 @@ export class CardDescription implements OnInit {
     this.favorite = !this.favorite;
     if (this.favorite) {
       this.favoriteService.addFavorite(this.movieDetails);
-    } else {
-      this.favoriteService.removeFavorite(this.movieDetails);
     }
   }
 

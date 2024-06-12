@@ -19,7 +19,7 @@ export class FavoriteService {
 
   addFavorite(movie: Movie): void {
     const currentFavorites = this.getFavorites();
-    if (!currentFavorites.some(fav => fav.id === movie.id)) {
+    if (!currentFavorites?.some(fav => fav.id === movie.id)) {
       currentFavorites.push(movie);
       this.updateFavorites(currentFavorites);
     }

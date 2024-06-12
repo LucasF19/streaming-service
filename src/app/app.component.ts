@@ -14,11 +14,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getAuthState().subscribe(user => {
-      if (user) {        
-        this.router.navigate(['/home']);
-      } else {
+      if (!user){
         this.router.navigate(['/login']);
-      }
+       }
     });
   }
 }

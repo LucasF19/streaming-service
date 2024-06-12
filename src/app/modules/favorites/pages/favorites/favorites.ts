@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FavoriteService } from '../../services/favorites.service';
 
 @Component({
@@ -8,10 +7,11 @@ import { FavoriteService } from '../../services/favorites.service';
   styleUrls: ['./favorites.scss'],
 })
 export class FavoritesPage implements OnInit {
+  nomeUsuario: string = '';
   favoriteMovies: any[] = [];
   isLoading = true;
 
-  constructor(private favoriteService: FavoriteService, private router: Router) {}
+  constructor(private favoriteService: FavoriteService) {}
 
   ngOnInit(): void {
     this.loadFavorites();

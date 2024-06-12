@@ -1,23 +1,35 @@
 import { ViewportScroller } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { convertRuntime } from '../../formatters/currect-hour';
+import { FavoriteService } from 'src/app/modules/favorites/services/favorites.service';
 
 @Component({
   selector: 'favorite-card',
   templateUrl: './favorite-card.component.html',
   styleUrl: './favorite-card.component.scss'
 })
-export class FavoriteCardComponent{
+export class FavoriteCardComponent implements OnInit{
   @Input() movies: any = [];
   @Input() isLoading!: boolean;
-  result!: any;
 
-  constructor(private router: Router, private viewportScroller: ViewportScroller){}
+  constructor(private router: Router, private viewportScroller: ViewportScroller, private favoriteService: FavoriteService){}
+
+  ngOnInit(): void {
+    this.favoriteService.favoriteMovies.subscribe(movies => {
+      this.movies = movies;
+    });
+
+    this.movies = this.favoriteService.getFavorites();
+  }
 
   onClickMovie(movieId: number): void {
     this.viewportScroller.scrollToPosition([0, 0]);
     this.router.navigate(['home/card-description', movieId]);
+  }
+
+  deleteFavorite(movieDetails: any): void {
+    this.favoriteService.removeFavorite(movieDetails);
   }
 
   getPosterPath(movie: any): string {

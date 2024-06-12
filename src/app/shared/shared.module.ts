@@ -24,7 +24,8 @@ import {
   Search,
   LogOut,
   Tv,
-  Users
+  Users,
+  Trash2
 } from 'angular-feather/icons';
 
 import { 
@@ -55,7 +56,8 @@ const icons = {
   Search,
   LogOut,
   Tv,
-  Users
+  Users,
+  Trash2
 };
 
 import { HttpClientModule } from '@angular/common/http';
