@@ -124,7 +124,7 @@ export class CardDescription implements OnInit {
   }
 
   goHome(){
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
 
   getReleaseYear(dateString: string): number {

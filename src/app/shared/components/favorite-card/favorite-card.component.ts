@@ -17,7 +17,7 @@ export class FavoriteCardComponent{
 
   onClickMovie(movieId: number): void {
     this.viewportScroller.scrollToPosition([0, 0]);
-    this.router.navigate(['/card-description', movieId]);
+    this.router.navigate(['home/card-description', movieId]);
   }
 
   getPosterPath(movie: any): string {

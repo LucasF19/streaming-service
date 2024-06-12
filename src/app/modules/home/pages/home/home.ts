@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MovieService } from '../../services/movie.service';
 import { AuthService } from '../../../services/auth.service';
@@ -60,7 +60,7 @@ export class AppHome implements OnInit {
   }
 
   movieSelectSearch(movieId: string){
-    this.router.navigate(['/card-description', movieId]);
+    this.router.navigate(['home/card-description', movieId]);
   }
 
   getTypesList() {

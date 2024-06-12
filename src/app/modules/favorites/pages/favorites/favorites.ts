@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FavoriteService } from '../../services/favorites.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'favorites-page',

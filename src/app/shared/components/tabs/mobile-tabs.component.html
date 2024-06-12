@@ -1,7 +1,7 @@
-<div class="tabs-container">
+<div *ngIf="showTabs" class="tabs-container">
   <nav class="mobile-tabs">
     <ul>
-      <li routerLinkActive="active" [routerLink]="['/']">
+      <li routerLinkActive="active" [routerLink]="['/home']">
         <i-feather name="Home"></i-feather>
         <span>Início</span>
       </li>
@@ -9,7 +9,7 @@
         <i-feather name="Bookmark"></i-feather>
         <span>Favoritos</span>
       </li>
-      <li routerLinkActive="active">
+      <li routerLinkActive="active" (click)="logout()">
         <i-feather name="log-out" ></i-feather>
         <span>Sair</span>
       </li>

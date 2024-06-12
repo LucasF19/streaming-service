@@ -1,32 +1,27 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: 'login.html',
-  styleUrls: ['login.scss']
+  styleUrls: ['login.scss'],
 })
 export class LoginPage {
-
   email: string = '';
   password: string = '';
-  errorMessage: string | null = null; // Variável para armazenar a mensagem de erro
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService) {}
 
   async login() {
     try {
       await this.authService.login(this.email, this.password);
-    } catch (error: any) { // Especifica o tipo de 'error' como 'any'
-      this.errorMessage = error.message; // Captura a mensagem de erro e a armazena na variável
+    } catch (error: any) {
+      this.errorMessage = error.message;
     }
   }
 
-
-    loginWithGoogle() {
-      this.authService.loginWithGoogle();
-    }
-
+  loginWithGoogle() {
+    this.authService.loginWithGoogle();
+  }
 }

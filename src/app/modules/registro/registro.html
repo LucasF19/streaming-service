@@ -1,50 +1,100 @@
-    <div>
-        <h2>iMO<span>VI</span>E</h2>
-    </div>
-
-    <div class="container">
-        <form class="inputs-box" #registroForm="ngForm" (ngSubmit)="registrarUsuario(registroForm)">
-
-            <div class="box">
-                <label for="nome">Nome:</label>
-                <input type="text" [(ngModel)]="nome" name="nome" id="nome" required minlength="8" placeholder="Digite seu nome" #nomeModel="ngModel">
-                <div *ngIf="nomeModel.invalid && (nomeModel.dirty || nomeModel.touched)" class="error">
-                    <p *ngIf="nomeModel.errors?.['required']">*Nome é obrigatório.</p>
-                    <p *ngIf="nomeModel.errors?.['minlength']">*O nome deve ter no mínimo 8 caracteres.</p>
-                </div>
-            </div>
-
-            <div class="box">
-                <label for="email">Email:</label>
-                <input type="email" [(ngModel)]="email" name="email" id="email" required placeholder="Digite seu email" #emailModel="ngModel">
-                <div *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched)" class="error">
-                    <p *ngIf="emailModel.errors?.['required']">*Email é obrigatório.</p>
-                    <p *ngIf="emailModel.errors?.['email']">*Email inválido.</p>
-                </div>
-            </div>
-
-            <div class="box">
-                <label for="senha">Senha:</label>
-                <input type="password" [(ngModel)]="senha" name="senha" id="senha" required minlength="6" placeholder="Digite sua senha" #senhaModel="ngModel">
-                <div *ngIf="senhaModel.invalid && (senhaModel.dirty || senhaModel.touched)">
-                    <p *ngIf="senhaModel.errors?.['required']">*Senha é obrigatória.</p>
-                    <p *ngIf="senhaModel.errors?.['minlength']">*A senha deve ter no mínimo 6 caracteres.</p>
-                </div>
-            </div>
-
-            <div class="box">
-                <label for="confirmar_senha">Confirmar Senha:</label>
-                <input type="password" [(ngModel)]="confirmarSenha" name="confirmarSenha" id="confirmarSenha" required placeholder="Confirme sua senha" #confirmarSenhaModel="ngModel">
-                    <p *ngIf="confirmarSenhaModel.invalid && (confirmarSenhaModel.dirty || confirmarSenhaModel.touched)" class="error">
-                        *Confirmar senha é obrigatório.
-                    </p>
-                    <p *ngIf="senha !== confirmarSenha && confirmarSenhaModel.dirty">
-                        *As senhas não coincidem.
-                </p>
-            </div>
-
-            <button type="submit" [disabled]="registroForm.invalid">Enviar</button>
-        </form>
-
-        <p class="register-link">Já tem conta? <a routerLink="/login">Faça Login</a></p>
-    </div>
+<div class="background-content min-h-[100vh] p-[30px]">
+  <div>
+    <h2>iMO<span>VI</span>E</h2>
+  </div>
+  <div class="container">
+    <form
+      class="inputs-box"
+      #registroForm="ngForm"
+      (ngSubmit)="registrarUsuario(registroForm)"
+    >
+      <div class="box">
+        <label for="nome">Nome:</label>
+        <input
+          type="text"
+          [(ngModel)]="nome"
+          name="nome"
+          id="nome"
+          required
+          minlength="8"
+          placeholder="Digite seu nome"
+          #nomeModel="ngModel"
+        />
+        <div
+          *ngIf="nomeModel.invalid && (nomeModel.dirty || nomeModel.touched)"
+          class="error"
+        >
+          <p *ngIf="nomeModel.errors?.['required']">*Nome é obrigatório.</p>
+          <p *ngIf="nomeModel.errors?.['minlength']">
+            *O nome deve ter no mínimo 8 caracteres.
+          </p>
+        </div>
+      </div>
+      <div class="box">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          id="email"
+          required
+          placeholder="Digite seu email"
+          #emailModel="ngModel"
+        />
+        <div
+          *ngIf="emailModel.invalid && (emailModel.dirty || emailModel.touched)"
+          class="error"
+        >
+          <p *ngIf="emailModel.errors?.['required']">*Email é obrigatório.</p>
+          <p *ngIf="emailModel.errors?.['email']">*Email inválido.</p>
+        </div>
+      </div>
+      <div class="box">
+        <label for="senha">Senha:</label>
+        <input
+          type="password"
+          [(ngModel)]="senha"
+          name="senha"
+          id="senha"
+          required
+          minlength="6"
+          placeholder="Digite sua senha"
+          #senhaModel="ngModel"
+        />
+        <div
+          *ngIf="senhaModel.invalid && (senhaModel.dirty || senhaModel.touched)"
+        >
+          <p *ngIf="senhaModel.errors?.['required']">*Senha é obrigatória.</p>
+          <p *ngIf="senhaModel.errors?.['minlength']">
+            *A senha deve ter no mínimo 6 caracteres.
+          </p>
+        </div>
+      </div>
+      <div class="box">
+        <label for="confirmar_senha">Confirmar Senha:</label>
+        <input
+          type="password"
+          [(ngModel)]="confirmarSenha"
+          name="confirmarSenha"
+          id="confirmarSenha"
+          required
+          placeholder="Confirme sua senha"
+          #confirmarSenhaModel="ngModel"
+        />
+        <p
+          *ngIf="confirmarSenhaModel.invalid && (confirmarSenhaModel.dirty || confirmarSenhaModel.touched)"
+          class="error"
+        >
+          *Confirmar senha é obrigatório.
+        </p>
+        <p *ngIf="senha !== confirmarSenha && confirmarSenhaModel.dirty">
+          *As senhas não coincidem.
+        </p>
+      </div>
+      <button type="submit" [disabled]="registroForm.invalid">Enviar</button>
+    </form>
+    <p class="register-link">
+      Já tem conta? <a routerLink="/login">Faça Login</a>
+    </p>
+  </div>
+</div>

@@ -12,7 +12,6 @@ import localePt from '@angular/common/locales/pt';
 registerLocaleData(localePt);
 
 export const routes: Routes = [
-  { path: '', component: AppHome, canActivate: [AuthGuard] },
   { path: '', component: AppHome },
   { path: 'card-description/:id', component: CardDescription },
 ];
