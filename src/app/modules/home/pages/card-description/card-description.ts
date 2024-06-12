@@ -39,12 +39,16 @@ export class CardDescription implements OnInit {
   fetchMovieDetails(id: string): void {
     this.movieService.getMovieDetails(id).subscribe({
       next: (data) => {
+        const savedFavorites: any = JSON.parse(localStorage.getItem('favoriteMovies') ?? '[]');
+
         this.movieDetails = data;
+        this.favorite = savedFavorites?.filter((item: { id: string; }) => item.id == this.movieId)?.length > 0;
+
         this.getSimilarMovies(data.genres[0]?.id);
         this.moviesCredit(id);
         this.getComments(id);
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
       }
     });
@@ -108,8 +112,11 @@ export class CardDescription implements OnInit {
 
   toggleFavorite() {
     this.favorite = !this.favorite;
+
     if (this.favorite) {
       this.favoriteService.addFavorite(this.movieDetails);
+    } else {
+      this.favoriteService.removeFavorite(this.movieDetails);
     }
   }
 
