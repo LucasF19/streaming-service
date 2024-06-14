@@ -83,21 +83,7 @@ export class AuthService {
   async loginWithGoogle(): Promise<void> {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      const result = await this.afAuth.signInWithPopup(provider);
-
-      if (result.additionalUserInfo?.isNewUser) {
-        const uid = result.user?.uid;
-        const email = result.user?.email;
-        const nome = result.user?.displayName;
-
-        if (uid && email && nome) {
-          await this.firestore
-            .collection('users')
-            .doc(uid)
-            .set({ nome, email });
-        }
-      }
-      this.router.navigate(['/home']);
+      await this.afAuth.signInWithRedirect(provider);
     } catch (error) {
       console.error('Erro ao fazer login com Google:', error);
     }
