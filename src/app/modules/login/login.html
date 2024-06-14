@@ -17,10 +17,6 @@
       </div>
       <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
       <button class="BNTlogin border-none" (click)="login()">Entrar</button>
-      <button class="google-login-button rounded-md mt-3" (click)="loginWithGoogle()">
-        <img class="m-0" src="../../../assets/google.svg" alt="Google Logo" class="google-icon">
-        Login com Google
-      </button>
     
       <p class="register-link">Não tem conta? <a routerLink="/registro">Cadastre-se</a></p>
     </div>

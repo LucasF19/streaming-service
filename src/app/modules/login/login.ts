@@ -20,8 +20,4 @@ export class LoginPage {
       this.errorMessage = error.message;
     }
   }
-
-  loginWithGoogle() {
-    this.authService.loginWithGoogle();
-  }
 }
