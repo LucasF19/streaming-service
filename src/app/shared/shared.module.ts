@@ -32,7 +32,8 @@ import {
   MovieCardComponent, 
   WhereToWatchModalComponent, 
   MobileTabsComponent, 
-  FavoriteCardComponent 
+  FavoriteCardComponent ,
+  LoaderComponent
 } from './components';
 
 const icons = {
@@ -68,7 +69,8 @@ import { RouterModule } from '@angular/router';
     MovieCardComponent, 
     WhereToWatchModalComponent, 
     MobileTabsComponent, 
-    FavoriteCardComponent
+    FavoriteCardComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +87,8 @@ import { RouterModule } from '@angular/router';
     FeatherModule,
     WhereToWatchModalComponent,
     MobileTabsComponent,
-    FavoriteCardComponent
+    FavoriteCardComponent,
+    LoaderComponent
   ],
   providers: [],
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './modules/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,40 @@ import { AuthService } from './modules/services/auth.service';
 })
 
 export class AppComponent implements OnInit {
+  isLoading: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private afAuth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    private router: Router
+  ) {}
 
-  ngOnInit() {
-    this.authService.getAuthState().subscribe(user => {
-      if (!user){
-        this.router.navigate(['/login']);
-       }
-    });
+  async ngOnInit(): Promise<void> {
+    this.isLoading = true;
+
+    try {
+      const result = await this.afAuth.getRedirectResult();
+
+      if (result.user) {
+        if (result.additionalUserInfo?.isNewUser) {
+          const uid = result.user.uid;
+          const email = result.user.email;
+          const nome = result.user.displayName;
+
+          if (uid && email && nome) {
+            await this.firestore
+              .collection('users')
+              .doc(uid)
+              .set({ nome, email });
+          }
+        }
+
+        this.router.navigate(['/home']);
+      }
+    } catch (error) {
+      console.error('Erro ao processar o redirecionamento de login com Google:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }
