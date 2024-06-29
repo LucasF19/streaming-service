@@ -6,8 +6,8 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   styleUrls: ['./watch-modal.component.scss'],
 })
 export class WhereToWatchModalComponent implements OnInit {
-  @Input() providers!: Array<any>;
-  @Input() movieName!: any;
+  @Input() providers!: any;
+  @Input() movieName!: string;
   @Output() close = new EventEmitter<void>();
   isEmpty!: boolean;
 
@@ -17,13 +17,6 @@ export class WhereToWatchModalComponent implements OnInit {
     } else {
       this.isEmpty = false;
     }
-  }
-
-  whereToWatch(plataform: string): void {
-    const movieTitle = this.movieName || '';
-    const searchQuery = `Assistir ${movieTitle} ${plataform}`;
-    const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-    window.open(googleSearchUrl, '_blank');
   }
 
   onClose(): void {

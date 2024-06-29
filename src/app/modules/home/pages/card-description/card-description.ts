@@ -104,8 +104,7 @@ export class CardDescription implements OnInit {
 
   getWatchProviders() {
     this.movieService.getWatchProviders(this.movieId).subscribe(data => {
-      const { buy, flatrate, rent } = data.results.BR || {};
-      this.watchProviders = buy || flatrate || rent;
+      this.watchProviders = data.results.BR;
       this.showModal = true;
     });
   }
