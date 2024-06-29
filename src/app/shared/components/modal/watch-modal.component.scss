@@ -19,7 +19,8 @@
   width: 80%;
   border-radius: 10px;
   color: #e6e6e6;
-  max-height: 600px;
+  max-height: 550px;
+  overflow: scroll;
 }
 
 .close-button {
@@ -27,9 +28,4 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
-}
-
-.modal-content img {
-  border-radius: 100%;
-  width: 50px;
 }

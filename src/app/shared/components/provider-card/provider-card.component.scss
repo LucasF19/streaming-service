@@ -1,0 +1,19 @@
+.modal-content {
+  background-color: #292c53;
+  border-radius: 10px;
+  color: #e6e6e6;
+  max-height: 550px;
+  overflow: scroll;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-content img {
+  border-radius: 100%;
+  width: 50px;
+}

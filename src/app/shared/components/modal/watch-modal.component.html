@@ -4,11 +4,10 @@
       <h2 class="mb-5">Onde assistir</h2>
 
       <div *ngIf="!isEmpty">
-        <div *ngFor="let provider of providers">
-          <div class="flex items-center bg-[#313982] rounded-full w-full p-3 mb-4" (click)="whereToWatch(provider.provider_name)">
-            <img [src]="provider.logo_path ? 'https://image.tmdb.org/t/p/w500' + provider.logo_path : 'https://via.placeholder.com/150'" [alt]="provider.provider_name">
-            <h2 class="ml-3 text-xl">{{provider.provider_name}}</h2>
-          </div>
+        <div *ngIf="providers">
+          <provider-component [typeStreaming]="'Assinar'" [titleMovie]="movieName" [provider]="providers.flatrate" *ngIf="providers.flatrate"/>
+          <provider-component [typeStreaming]="'Comprar'" [titleMovie]="movieName" [provider]="providers.buy" *ngIf="providers.buy"/>
+          <provider-component [typeStreaming]="'Alugar'" [titleMovie]="movieName" [provider]="providers.rent" *ngIf="providers.rent"/>
         </div>
       </div>
 
