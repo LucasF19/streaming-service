@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading">
   <div>
-    <div *ngFor="let movie of movies">
+    <div *ngFor="let movie of movies" class="break-words">
       <div class="flex justify-between">
         <div class="rounded-[10px] mb-3">
           <h2 class="text-white text-[20px] pt-2">{{movie.title}}</h2>
@@ -29,7 +29,7 @@
               <i-feather name="users" class="mr-2" style="width: 20px;"></i-feather>
               <span>{{movie.popularity}} assistiram</span>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center flex-wrap">
               <span *ngFor="let star of [2, 4, 6, 8, 10]">
                 <i-feather name="star" class="fill-star mr-1" [class.filled]="star <= movie?.vote_average"></i-feather>
               </span>
